@@ -17,6 +17,8 @@
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
 
+import get
+import list
 
 class MainHandler(webapp.RequestHandler):
     def get(self):
@@ -24,7 +26,9 @@ class MainHandler(webapp.RequestHandler):
 
 
 def main():
-    application = webapp.WSGIApplication([('/', MainHandler)],
+    application = webapp.WSGIApplication([(r'/', MainHandler),
+                                         (r'^/get/?', get.GetActionHandler),
+                                         (r'^/list/?', list.ListActionHandler)],
                                          debug=True)
     util.run_wsgi_app(application)
 
