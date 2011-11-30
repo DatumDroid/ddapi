@@ -15,13 +15,15 @@ class GetActionHandler(webapp2.RequestHandler):
             return
         provider = self.request.GET['provider']
         query = self.request.GET['q']
-        p_token = self.request.GET.get('p_token', '')
+        page = self.request.GET.get('page', 1)
+        count = self.request.GET.get('count', 10)
         format = self.request.GET.get('format', 'json')
         pretty = bool(self.request.GET.get('pretty', False))
         
         if format == 'json':
             self.response.out.write(adaptors.get_json(provider, query,
-                                                      p_token=p_token,
+                                                      page=page,
+                                                      count=count,
                                                       pretty=pretty))
         else:
             self.response.status = '405 Format not supported'

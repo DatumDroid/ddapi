@@ -12,5 +12,5 @@ class Adaptor(object):
     
     def get_json(self, query, **kwargs):
         '''Utility method that returns JSON for a query.'''
-        return json.dumps(self.get(query),
+        return json.dumps(self.get(query, **kwargs),
                           indent = 4 if kwargs.get('pretty', False) == True else None)
